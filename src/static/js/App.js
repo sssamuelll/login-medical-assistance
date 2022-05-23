@@ -21,7 +21,20 @@ const App = () => {
         var md5Password = md5(uppername + details.password);
         console.log(md5Password);
 
-
+        
+        const requestOptions = {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user: details.username, passw: md5Password })
+        };
+        fetch('https://www.zeumatic.com/ehr/rest/login.php', requestOptions)
+            .then(response => response.json())
+            .then( data => console.log(data));
+        
+        
+        
+        /*
         if (details.username == adminUser.username && details.password == adminUser.password) {
             console.log("Logged in");
             setUser({
@@ -31,7 +44,7 @@ const App = () => {
         } else {
             console.log("Details do not match");
             setError("Details do not match");
-        }
+        }*/
     }
 
     const Logout = () => {
