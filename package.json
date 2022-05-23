@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serve",
-    "dev": "parcel src/views/dashboard.html",
+    "dev": "parcel src/views/login.html",
     "start": "parcel src/views/login.html",
     "build": "parcel build src/views/login.html",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
