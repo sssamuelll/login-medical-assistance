@@ -23,7 +23,6 @@ const App = () => {
 
         
         const requestOptions = {
-            mode: 'no-cors',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user: details.username, passw: md5Password })
