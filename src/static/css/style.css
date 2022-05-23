@@ -60,7 +60,7 @@ strong {
   width: 60%;
   max-width: 1140px;
   max-height: 540px;
-  padding: 8rem 6rem;
+  padding: 8rem 4rem;
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.375);
@@ -171,14 +171,12 @@ a {
   .overlay__title {
     font-size: 1.25rem;
     line-height: 2rem;
-    margin-bottom: 1.5rem;
   }
 
   .overlay__description {
-    margin-bottom: 2rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
   }
 }
 @media only screen and (max-width: 600px) {
