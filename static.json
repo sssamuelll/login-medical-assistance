@@ -3,7 +3,7 @@
     "routes": {
       "**": "login.html"
     },
-    "https_only": false,
+    "https_only": true,
     "error_page": "login.html",
     "headers": {
       "/**": {
