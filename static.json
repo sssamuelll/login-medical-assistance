@@ -4,7 +4,7 @@
       "**": "login.html"
     },
     "https_only": true,
-    "error_page": "login.html",
+    "error_page": "error.html",
     "headers": {
       "/**": {
         "Cache-Control": "public, max-age=0, must-revalidate"
