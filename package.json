@@ -4,9 +4,9 @@
   "description": "propuesta de login para la aplicación de consultas medicas",
   "scripts": {
     "serve": "serve",
-    "dev": "parcel src/views/index.html",
-    "start": "parcel src/views/index.html",
-    "build": "parcel build src/views/index.html",
+    "dev": "parcel src/views/login.html",
+    "start": "parcel src/views/login.html",
+    "build": "parcel build src/views/login.html",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
