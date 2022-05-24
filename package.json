@@ -10,7 +10,6 @@
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
-    
   },
   "author": "Samuel Dario",
   "license": "ISC",
