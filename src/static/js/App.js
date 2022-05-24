@@ -17,14 +17,12 @@ const App = () => {
 
         var md5 = require('md5');
         var uppername = unescape( encodeURIComponent(  details.username.toUpperCase() ) );
-        
-        var md5Password = md5(uppername + details.password);
-        console.log(md5Password);
+        var md5Password = md5( uppername + details.password ).toString();
 
         
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'access' : 'access' },
             body: JSON.stringify({ user: details.username, passw: md5Password })
         };
         fetch('https://www.zeumatic.com/ehr/rest/login.php', requestOptions)
