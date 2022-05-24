@@ -4,11 +4,6 @@ import LoginForm from './LoginForm';
 
 const App = () => {
 
-    const adminUser = {
-        username:"asd" ,
-        password:"asd" ,
-    }
-
     const [user, setUser] = useState({username:"", password:""});
     const [error, setError] = useState("");
 
@@ -17,31 +12,17 @@ const App = () => {
 
         var md5 = require('md5');
         var uppername = unescape( encodeURIComponent(  details.username.toUpperCase() ) );
-        var md5Password = md5( uppername + details.password ).toString();
-
+        var md5Password = md5( details.username + details.password ).toString();
+        console.log(md5Password);
         
         const requestOptions = {
-            method: 'POST',
+            method: 'GET',
             headers: { 'access' : 'access' },
-            body: JSON.stringify({ user: details.username, passw: md5Password })
         };
-        fetch('https://www.zeumatic.com/ehr/rest/login.php', requestOptions)
+        fetch('https://www.zeumatic.com/ehr/rest/login.php?user='+details.username+'&passw='+md5Password, requestOptions)
             .then(response => response.json())
             .then( data => console.log(data)).catch( error => console.log(error));
         
-        
-        
-        /*
-        if (details.username == adminUser.username && details.password == adminUser.password) {
-            console.log("Logged in");
-            setUser({
-                username: details.username,
-                password: details.password
-            })
-        } else {
-            console.log("Details do not match");
-            setError("Details do not match");
-        }*/
     }
 
     const Logout = () => {
