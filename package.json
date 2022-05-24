@@ -9,7 +9,8 @@
     "build": "parcel build src/views/login.html",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx}\"",
-    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+    "heroku-postbuild" : "parcel build src/index.html"
   },
   "author": "Samuel Dario",
   "license": "ISC",
