@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
-function LoginForm({ Login, error }) {
-    const [details, setDetails] =useState({username: "", password: ""});
-
+function LoginForm({ Login, Next, error }) {
+  
+    const [details, setDetails] = useState({username: "", password: ""});
     const submitHandler = e => {
         e.preventDefault();
-
         Login(details);
+    }
+
+    const forgetHandler = e => {
+        e.preventDefault();
+        Next("Forgot");
     }
 
     return (
@@ -34,7 +38,7 @@ function LoginForm({ Login, error }) {
                 </div>
                 <div className="checkbox mb-3">
                   <label>
-                    <input type="checkbox" value="remember-me" />
+                    <a href="" onClick={ forgetHandler }>Forgot Password</a>
                   </label>
                 </div>
 
@@ -45,7 +49,7 @@ function LoginForm({ Login, error }) {
 
                 <button type="submit" className="overlay__btn overlay__btn--transparent">
                   
-                    Sign In
+                  Sign In
                   
                 </button>
 
@@ -54,6 +58,7 @@ function LoginForm({ Login, error }) {
             </div>
     
         </form>
+        
     )
 }
 
