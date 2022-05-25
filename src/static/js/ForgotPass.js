@@ -7,6 +7,7 @@ function ForgotPass({ Forgot, Next, error }) {
 
     const submitHandler = e => {
         e.preventDefault();
+
         Forgot(details);
     }
 

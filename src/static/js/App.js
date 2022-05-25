@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
-
 
 import LoginForm from './LoginForm';
 import ForgotPass from './ForgotPass';
@@ -16,7 +15,8 @@ const App = () => {
     const [active, setActive] = useState("Login");
     
     const Forgot = details => {
-    
+        i = i + 1;
+        console.log("Por aqui pasamos "+i+" veces.");
         const requestOptions = {
             method: 'GET',
             headers: { 'access' : 'access' },
@@ -24,10 +24,11 @@ const App = () => {
         fetch('https://www.zeumatic.com/ehr/rest/reset.php?user='+details.email, requestOptions)
             .then(response => response.json())
             .then( data => resetHandler(data)).catch( error => console.log(error));
-
+        
     };
 
     const resetHandler = data => {
+        
         var obj = JSON.parse(data);
         if (obj.error_id == 200) {
             
@@ -40,6 +41,7 @@ const App = () => {
         }else{
             setMessage(obj.error_desc);
         }
+
     }
 
     const Login = details => {
@@ -55,25 +57,32 @@ const App = () => {
         fetch('https://www.zeumatic.com/ehr/rest/login.php?user='+details.username+'&passw='+md5Password, requestOptions)
             .then(response => response.json())
             .then( data => console.log(data)).catch( error => console.log(error));
-        
+
     }
 
     const Next = e => {
+
         setActive(e);
+
     };
 
     const Reset = details => {
+
         console.log(details);
+
     };
 
     const Logout = () => {
+
         setUser({
             username:"", email: ""
         });
         console.log("Logout");
+
     }
 
     return (
+
         <div className='App'>
             {(user.username != "") ? (
                 <div className="welcome">
@@ -83,12 +92,13 @@ const App = () => {
             ) : (
                 <div>
                     {active === "Forgot" && <ForgotPass Forgot={Forgot} Next = {Next} error={error} />}
-                    {active === "Login" && <LoginForm Login={Login} Next={Next} error={error} />}
+                    {active === "Login" && <LoginForm Login={Login} Next = {Next} error={error} />}
                     {active === "Reset" && <ResetPass Reset={Reset} Next = {Next} Message={message} error={error} /> }
                     {}
                 </div>
             )}
         </div>
+
     )
 }
 
