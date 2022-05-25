@@ -84,7 +84,11 @@
   }
 
   .overlay__description {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .overlay__bottom {
+    font-size: 0.8rem;
   }
   
   .text-gradient {
@@ -104,7 +108,7 @@
     line-height: 1.75rem;
     margin-bottom: 3rem;
   }
-  
+
   .overlay__btns {
     width: 100%;
     max-width: 30rem;
@@ -185,10 +189,15 @@
   
     .overlay__description {
         
-        font-size: 1rem;
-        line-height: 1.5rem;
-        margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 1rem;
     }
+
+    .overlay__bottom {
+      font-size: 0.8rem;
+    }
+
   }
   
   @media only screen and (max-width: 600px) {
@@ -209,5 +218,10 @@
     .overlay__btn:first-child {
       margin-bottom: 1rem;
     }
+
+    .overlay__bottom {
+      font-size: 0.75rem;
+    }
+
   }
   
