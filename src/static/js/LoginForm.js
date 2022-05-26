@@ -1,12 +1,35 @@
 import React, { useState } from "react";
+import Axios from "axios";
 
-function LoginForm({ Login, Next, error }) {
+function LoginForm({ User, Next, error }) {
   
     const [details, setDetails] = useState({username: "", password: ""});
     
     const submitHandler = e => {
         e.preventDefault();
-        Login(details);
+        var md5 = require('md5');
+        var md5Password = md5( details.username + details.password ).toString();
+        console.log(md5Password);
+        
+        Axios.get('https://www.zeumatic.com/ehr/rest/login.php?user='+details.username+'&passw='+md5Password)
+            .then(response => respHandler(response)).catch( error => console.log(error));
+    }
+
+    const respHandler = response => {
+      
+      var data = JSON.parse(response.data);
+      data = data[0]
+      console.log(data);
+      if (data.renew === "1") {
+        
+        User(details);
+        Next('Renew');
+        
+      }else{
+        User(details);
+        Next('Dashboard');
+      }
+
     }
 
     const forgetHandler = e => {

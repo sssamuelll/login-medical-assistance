@@ -1,15 +1,47 @@
 import React, { useState } from "react";
+import Axios from "axios";
 
 
-function RenewPass({ Renew, Next, error }) {
+function RenewPass({ User, user, Next, error }) {
 
     const [details, setDetails] = useState({newPassword: "", confirmPassword:""});
 
     const submitHandler = e => {
         e.preventDefault();
+        if (details.newPassword == details.confirmPassword) {
+            
+            var md5 = require('md5');
+            var md5newPassword = md5( user.username + details.newPassword ).toString();
+            
+            var md5Password = md5( user.username + user.password ).toString();
+            console.log("current");
+            console.log(md5Password);
+            console.log("new");
+            console.log(md5newPassword);
 
-        Renew(details);
-    }
+            Axios.get('https://www.zeumatic.com/ehr/rest/change.php?user='+user.username+'&current='+md5Password+'&new='+md5newPassword)
+            .then(response => respHandler(response)).catch( error => console.log(error));
+
+        } else {
+            console.log("error");
+        }
+    };
+
+    const respHandler = response => {
+
+        var data = JSON.parse(response.data);
+        console.log(data);
+        if (data.error_id == 200) {
+
+            console.log("eureka");
+            User({password:details.newPassword});
+            Next("Dashboard");
+
+        } else {
+            console.log("eureko");    
+        }
+
+    };
 
     return (
         <form onSubmit={submitHandler}>

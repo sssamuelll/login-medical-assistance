@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
+import { Axios } from "axios";
 
 import LoginForm from './LoginForm';
 import ForgotPass from './ForgotPass';
 import ResetPass from './ResetPass';
+import RenewPass from './RenewPass';
+import Dashboard from './Dashboard';
 
 var i = 0;
 
@@ -14,36 +17,7 @@ const App = () => {
     const [message, setMessage] = useState("");
     const [active, setActive] = useState("Login");
     
-    const Forgot = details => {
-        i = i + 1;
-        console.log("Por aqui pasamos "+i+" veces.");
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'access' : 'access' },
-        };
-        fetch('https://www.zeumatic.com/ehr/rest/reset.php?user='+details.email, requestOptions)
-            .then(response => response.json())
-            .then( data => resetHandler(data)).catch( error => console.log(error));
-        
-    };
-
-    const resetHandler = data => {
-        
-        var obj = JSON.parse(data);
-        if (obj.error_id == 200) {
-            
-            setMessage(obj.error_desc);
-            console.log("estamos pasando por aqui");
-            console.log({message});
-            console.log("fin del mensaje");
-            setActive("Reset");
-            
-        }else{
-            setMessage(obj.error_desc);
-        }
-
-    }
-
+    /*
     const Login = details => {
 
         var md5 = require('md5');
@@ -53,10 +27,20 @@ const App = () => {
         const requestOptions = {
             method: 'GET',
             headers: { 'access' : 'access' },
-        };
-        fetch('https://www.zeumatic.com/ehr/rest/login.php?user='+details.username+'&passw='+md5Password, requestOptions)
-            .then(response => response.json())
+        };IrPs8xcGQZYxW
             .then( data => console.log(data)).catch( error => console.log(error));
+
+    }*/
+
+    const User = user => {
+
+        setUser(user);
+
+    }
+
+    const Message = e => {
+
+        setMessage(e);
 
     }
 
@@ -77,24 +61,27 @@ const App = () => {
         setUser({
             username:"", email: ""
         });
-        console.log("Logout");
+        Next("Login");
+        
 
     }
 
     return (
 
         <div className='App'>
-            {(user.username != "") ? (
+            {(user.username != "" && active != "Renew") ? (
                 <div className="welcome">
-                    <h2>Welcome, <span>{user.username}</span></h2>
-                    <button>Logout</button>
+                    
+                    {active === "Dashboard" && <Dashboard User = {User} user = {user} Next = {Next} Message={message} error={error} Logout={Logout}/> }
+                    
                 </div>
             ) : (
                 <div>
-                    {active === "Forgot" && <ForgotPass Forgot={Forgot} Next = {Next} error={error} />}
-                    {active === "Login" && <LoginForm Login={Login} Next = {Next} error={error} />}
+                    {active === "Forgot" && <ForgotPass Next = {Next} Message = {Message} error={error} />}
+                    {active === "Login" && <LoginForm User = {User} Next = {Next} error={error} />}
                     {active === "Reset" && <ResetPass Reset={Reset} Next = {Next} Message={message} error={error} /> }
-                    {}
+                    {active === "Renew" && <RenewPass User = {User} user = {user} Next = {Next} Message={message} error={error} /> }
+                    
                 </div>
             )}
         </div>
